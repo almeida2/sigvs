@@ -6,7 +6,11 @@ import org.junit.jupiter.api.Test;
 
 import com.fatec.sigvs.model.Cliente;
 
-public class Req09CadastrarClienteTests3 {
+/**
+ * Objetivo de teste - validar a integração entre a classe Cliente e a ValidaCPF
+ * Segue uma abordagem de desenvolvimento orientado a testes de aceitação.
+ */
+public class TIReq09CadastrarClienteTests3 {
     @Test
     public void ct01_cadastrar_cliente_com_cpf_valido() {
         // dado que as informacoes de cliente sao validas

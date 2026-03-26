@@ -6,7 +6,10 @@ import org.junit.jupiter.api.Test;
 
 import com.fatec.sigvs.model.ValidaCpf;
 
-public class Req09CadastrarClienteTests1 {
+/**
+ * Teste unitario da classe ValidaCpf
+ */
+public class TUReq09CadastrarClienteTests1 {
     @Test
     public void ct01_cadastrar_cliente_com_cpf_valido() {
         // dado que as informacoes de cliente sao validas
