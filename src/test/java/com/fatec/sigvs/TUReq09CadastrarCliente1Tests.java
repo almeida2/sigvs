@@ -1,23 +1,26 @@
 package com.fatec.sigvs;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import com.fatec.sigvs.model.ValidaCpf;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 /**
- * Teste unitario da classe ValidaCpf
+ * Objetivo de teste - teste unitario da classe ValidaCPF.
+ * A seta (->) em Java é o operador principal das Expressões Lambda,
+ * introduzidas no Java 8. Ele separa os parâmetros da função do seu corpo
+ * (implementação), * permitindo escrever código de forma mais concisa,
+ * especialmente ao trabalhar com interfaces funcionais e coleções (Streams API)
  */
-public class TUReq09CadastrarCliente1Tests {
+@DisplayName("Requisito 09 - Cadastro de Cliente")
+class TUReq09CadastrarCliente1Tests {
+
     @Test
-    public void ct01_cadastrar_cliente_com_cpf_valido() {
-        // dado que as informacoes de cliente sao validas
-        ClienteDTO cliente = new ClienteDTO("95388326047", "Joao", "12345678", "Rua 1", "Bairro 1", "Cidade 1",
-                "Complemento 1", "joao@gmail.com");
-        // quando o cliente é cadastrado
-        ValidaCpf cpf = new ValidaCpf(cliente.cpf());
-        // então o cpf é valido
-        assertTrue(cpf.isValido());
+    @DisplayName("CT01 - Deve validar a criação de um cliente com CPF válido")
+    void deveValidarCpfQuandoClientePossuiDadosValidos() {
+        assertTrue(new ValidaCpf("95388326047").isValido(),
+                () -> "O CPF " + "95388326047" + " deveria ser considerado válido");
     }
 }
