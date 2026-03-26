@@ -9,7 +9,7 @@ import com.fatec.sigvs.model.ValidaCpf;
 /**
  * Teste unitario da classe ValidaCpf
  */
-public class TUReq09CadastrarClienteTests1 {
+public class TUReq09CadastrarCliente1Tests {
     @Test
     public void ct01_cadastrar_cliente_com_cpf_valido() {
         // dado que as informacoes de cliente sao validas

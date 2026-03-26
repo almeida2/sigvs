@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * funcionais e coleções (Streams API)
  */
 @DisplayName("Requisito 09 - Cadastro de Cliente")
-class TUReq09CadastrarClienteTests2 {
+class TUReq09CadastrarCliente2Tests {
 
     @Test
     @DisplayName("CT01 - Deve validar a criação de um cliente com CPF válido")
