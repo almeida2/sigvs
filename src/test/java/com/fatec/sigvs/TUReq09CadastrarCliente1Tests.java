@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import com.fatec.sigvs.model.ValidaCpf;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
@@ -18,9 +19,16 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class TUReq09CadastrarCliente1Tests {
 
     @Test
-    @DisplayName("CT01 - Deve validar a criação de um cliente com CPF válido")
-    void deveValidarCpfQuandoClientePossuiDadosValidos() {
+    @DisplayName("CT01 - Verifica o comportamento da aplicação de um cliente com CPF válido")
+    void ct01_quando_dados_validos_retorna_true() {
         assertTrue(new ValidaCpf("95388326047").isValido(),
                 () -> "O CPF " + "95388326047" + " deveria ser considerado válido");
+    }
+
+    @Test
+    @DisplayName("CT02 - Verifica o comportamento da aplicação de um cliente com CPF inválido")
+    void ct02_quando_dados_invalidos_retorna_false() {
+        assertFalse(new ValidaCpf("").isValido(),
+                () -> "O CPF deveria ser considerado inválido");
     }
 }
