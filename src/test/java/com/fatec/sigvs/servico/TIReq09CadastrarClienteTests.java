@@ -16,7 +16,7 @@ import com.fatec.sigvs.model.ClienteDTO;
 import com.fatec.sigvs.model.IClienteRepository;
 
 @SpringBootTest
-public class Req09CadastrarClienteTests {
+public class TIReq09CadastrarClienteTests {
     @Autowired
     IClienteService clienteService;
     @Autowired
