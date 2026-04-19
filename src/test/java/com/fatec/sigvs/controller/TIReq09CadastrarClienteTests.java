@@ -40,6 +40,9 @@ public class TIReq09CadastrarClienteTests {
         return new HttpEntity<>(clienteJson, headers);
     }
 
+    /**
+     * 
+     */
     @Test
     void ct02_cadastroComDadosValidos_retornaStatus201ECadastroComSucesso() {
         // ********************************************************************
