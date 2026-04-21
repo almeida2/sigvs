@@ -31,7 +31,7 @@ Para rodar este projeto localmente, siga os passos abaixo:
    git clone https://github.com/seu-usuario/sigvs.git
 
  2. **Abra o terminal na pasta raiz do projeto:** <p>
-Pasta raiz - C:\temp\projeto-java\sigvs <p>
-IDE: no menu principal da IDE run java <p> 
-Maven: para compilar e gerar o build exeute no terminal - mvn clean install <p>
-JAR: no cmd execute - java -jar sigvs-0.0.1-SNAPSHOT.jar. 
+Pasta raiz - exemplo - C:\temp\projeto-java\sigvs <p>
+IDE: execute o arquivo SigvsApplication.java pelo menu principal da IDE<p> 
+Maven: para compilar e gerar o build execute no terminal - mvn clean install <p>
+JAR: copie o arquivo sigvs-0.0.1-SNAPSHOT.jar da pasta target/ e execute no cmd: java -jar sigvs-0.0.1-SNAPSHOT.jar <p>
