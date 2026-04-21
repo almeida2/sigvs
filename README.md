@@ -18,7 +18,7 @@ Esta é a API de gerenciamento de clientes, responsável por fornecer endpoints 
 - [x] Consulta cliente por CPF.
 - [x] Atualização de dados cadastrais - valida CEP.
 - [x] Remoção de clientes do sistema.
- * Consulta o endereço utilizando o ViaCEP
+ * Os endpoints estáo documentandos utilizando OpenAPI
 
 ## 📦 Como executar o projeto
 
