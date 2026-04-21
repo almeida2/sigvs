@@ -3,7 +3,9 @@
 ![Status do Projeto](https://img.shields.io/badge/status-em_desenvolvimento-yellow)
 ![License](https://img.shields.io/badge/license-MIT-green)
 
-Esta é a API de gerenciamento de clientes, responsável por fornecer endpoints para operações de CRUD (Create, Read, Update, Delete) e integração com a interface frontend.
+Fatec Diadema - Curso - Desenvolvimento de Software Multiplataforma - Disciplina LDW <p>
+Grupo - Jose da Silva Xavier, Carlos Alberto <p>
+API de gerenciamento de clientes - responsável por fornecer endpoints de operações CRUD para integração com a interface de usuário.
 
 ## 🚀 Tecnologias Utilizadas
 
@@ -19,7 +21,7 @@ Esta é a API de gerenciamento de clientes, responsável por fornecer endpoints 
 - [x] Atualização de dados cadastrais - valida CEP.
 - [x] Remoção de clientes do sistema.
  * Os endpoints estáo documentandos utilizando OpenAPI
-
+ * Este protipo é implementando utilizando H2 na camada de persistencia.
 ## 📦 Como executar o projeto
 
 Para rodar este projeto localmente, siga os passos abaixo:
