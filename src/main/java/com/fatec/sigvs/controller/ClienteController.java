@@ -1,10 +1,14 @@
 package com.fatec.sigvs.controller;
 
+import java.util.List;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -73,5 +77,28 @@ public class ClienteController {
             ResponseApi<Cliente> response = new ResponseApi<>("Erro inesperado ao cadastrar cliente.");
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
         }
+    }
+
+    @Operation(summary = "Busca um cliente por CPF", description = "Retorna os dados do cliente encontrado")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Cliente encontrado com sucesso"),
+            @ApiResponse(responseCode = "404", description = "Cliente não encontrado"),
+            @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
+    })
+    @GetMapping(value = "/{cpf}")
+    public ResponseEntity<Cliente> buscarPorCpf(@PathVariable String cpf) {
+        return clienteService.consultarPorCpf(cpf)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+
+    @Operation(summary = "Retorna todos os clientes", description = "Lista todos os clientes cadastrados na base de dados")
+    @ApiResponse(responseCode = "200", description = "Lista retornada com sucesso")
+    @GetMapping("/all")
+    public ResponseEntity<ResponseApi<List<Cliente>>> getAll() {
+        logger.info(">>>>>> api cliente controller consulta todos iniciado...");
+        List<Cliente> clientes = clienteService.consultaTodos();
+        ResponseApi<List<Cliente>> response = new ResponseApi<>(clientes, "Lista de clientes cadastrados");
+        return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 }

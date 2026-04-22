@@ -20,7 +20,7 @@ API de gerenciamento de clientes - responsável por fornecer endpoints de opera�
 - [x] Consulta cliente por CPF.
 - [x] Atualização de dados cadastrais - valida CEP.
 - [x] Remoção de clientes do sistema.
- * Os endpoints estáo documentandos utilizando OpenAPI
+ * Os endpoints estáo documentandos utilizando Swagger UI em - http://localhost:8080/swagger-ui/index.html 
  * Este protipo é implementando utilizando H2 na camada de persistencia.
 ## 📦 Como executar o projeto
 

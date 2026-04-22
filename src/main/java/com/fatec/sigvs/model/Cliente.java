@@ -46,12 +46,14 @@ public class Cliente {
     }
 
     public void setCpf(String c) {
-        ValidaCpf vCpf = new ValidaCpf(c);
-
-        if (c == null || c.isBlank() || !vCpf.isValido())
+        if (c == null || c.isBlank())
             throw new IllegalArgumentException("CPF invalido");
         else {
-            this.cpf = c;
+            ValidaCpf vCpf = new ValidaCpf(c);
+            if (!vCpf.isValido())
+                throw new IllegalArgumentException("CPF invalido");
+            else
+                this.cpf = c;
         }
 
     }
