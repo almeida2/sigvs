@@ -38,4 +38,28 @@ public class TIReq09CadastrarCliente1Tests {
             assertEquals("CPF invalido", e.getMessage());
         }
     }
+
+    @Test
+    public void ct03_cadastrar_cliente_com_cpf_invalido() {
+        try {
+            // dado que as informações do cliente são invalidas
+            // quando a operação é confirmada
+            cliente.setCpf(null);
+        } catch (Exception e) {
+            // então mensagem cliente invalido
+            assertEquals("CPF invalido", e.getMessage());
+        }
+    }
+
+    @Test
+    public void ct04_cadastrar_cliente_com_cpf_invalido() {
+        try {
+            // dado que as informações do cliente são invalidas
+            // quando a operação é confirmada
+            cliente.setCpf("12345678901");
+        } catch (Exception e) {
+            // então mensagem cliente invalido
+            assertEquals("CPF invalido", e.getMessage());
+        }
+    }
 }
