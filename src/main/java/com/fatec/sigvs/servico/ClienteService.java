@@ -12,6 +12,8 @@ import com.fatec.sigvs.model.ClienteDTO;
 import com.fatec.sigvs.model.Endereco;
 import com.fatec.sigvs.model.IClienteRepository;
 
+import jakarta.transaction.Transactional;
+
 @Service
 public class ClienteService implements IClienteService {
     Logger logger = LogManager.getLogger(this.getClass());
@@ -64,6 +66,7 @@ public class ClienteService implements IClienteService {
 
     @Override
     public Optional<Cliente> consultarPorCpf(String cpf) {
+        logger.info(">>>>>> clienteservice ->   consulta por cpf iniciado: " + cpf);
         return repository.findByCpf(cpf);
     }
 
@@ -74,8 +77,19 @@ public class ClienteService implements IClienteService {
     }
 
     @Override
+    @Transactional // Garante que a operação de deleção seja atômica
     public boolean excluir(String cpf) {
-        repository.deleteByCpf(cpf);
-        return true;
+
+        // 1. Verificar se o cliente existe
+        Optional<Cliente> clienteExistente = repository.findByCpf(cpf);
+
+        if (clienteExistente.isPresent()) {
+            // 2. Se o cliente existe, realiza a exclusão
+            repository.deleteByCpf(cpf);
+            return true; // Exclusão bem-sucedida
+        } else {
+            // 3. Se o cliente não existe
+            return false; // Não foi possível excluir (não encontrado)
+        }
     }
 }

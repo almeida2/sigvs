@@ -1,12 +1,14 @@
 package com.fatec.sigvs.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fatec.sigvs.model.Cliente;
 import com.fatec.sigvs.model.ClienteDTO;
+import com.fatec.sigvs.model.Endereco;
 import com.fatec.sigvs.servico.IClienteService;
 import com.fatec.sigvs.servico.IEnderecoService;
 
@@ -86,10 +89,23 @@ public class ClienteController {
             @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
     })
     @GetMapping(value = "/{cpf}")
-    public ResponseEntity<Cliente> buscarPorCpf(@PathVariable String cpf) {
-        return clienteService.consultarPorCpf(cpf)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+    public ResponseEntity<ResponseApi<Cliente>> buscarPorCpf(@PathVariable String cpf) {
+        logger.info(">>>>>> api cliente controller consulta cpf iniciado...");
+        try {
+            Optional<Cliente> c = clienteService.consultarPorCpf(cpf);
+            logger.info(">>>>>> apicontroller cliente consulta servico iniciado");
+            if (c.isPresent()) {
+                ResponseApi<Cliente> response = new ResponseApi<>(c.get(), "");
+                return ResponseEntity.status(HttpStatus.OK).body(response);
+            } else {
+                ResponseApi<Cliente> response = new ResponseApi<>("CPF não encontrado.");
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+            }
+        } catch (Exception e) {
+            logger.info(">>>>>>apicontroller getCliente erro nao esperado => " + e.getMessage());
+            ResponseApi<Cliente> response = new ResponseApi<>(e.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+        }
     }
 
     @Operation(summary = "Retorna todos os clientes", description = "Lista todos os clientes cadastrados na base de dados")
@@ -101,4 +117,41 @@ public class ClienteController {
         ResponseApi<List<Cliente>> response = new ResponseApi<>(clientes, "Lista de clientes cadastrados");
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
+
+    /**
+     * exclusao do cliente pelo cpf
+     * 
+     * @param cpf O CPF do cliente a ser excluído, extraído da URL.
+     */
+    @DeleteMapping("/{cpf}") // path variable-o parametro e envidado no endpoint
+    public ResponseEntity<ResponseApi<Cliente>> excluirCliente(@PathVariable String cpf) {
+        logger.info(">>>>>>apicontroller excluir cliente iniciado " + cpf);
+        // 1. Chama o servico para executar a exclusao
+        boolean excluido = clienteService.excluir(cpf);
+
+        // 2. Envelopamento da resposta HTTP
+        if (excluido) {
+            // Se a exclusão foi bem-sucedida, retorna o status HTTP 204 (No Content)
+            // 204 é o status padrão para deleções bem-sucedidas que não retornam um corpo
+            // de resposta.
+            logger.info(">>>>>>apicontroller cliente excluido ");
+            return ResponseEntity.noContent().build();
+        } else {
+            // Se o recurso não foi encontrado para exclusão, retorna 404 (Not Found)
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @GetMapping("/cep/{cep}")
+    public ResponseEntity<ResponseApi<Endereco>> consultarCep(@PathVariable String cep) {
+        Optional<Endereco> e = enderecoService.obtemLogradouroPorCep(cep);
+        if (e.isPresent()) {
+            ResponseApi<Endereco> response = new ResponseApi<>(e.get(), "Endereco obtido com sucesso.");
+            return ResponseEntity.status(HttpStatus.OK).body(response);
+        } else {
+            ResponseApi<Endereco> response = new ResponseApi<>("CEP não encontrado.");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+        }
+    }
+
 }
