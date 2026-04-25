@@ -101,7 +101,10 @@ public class Cliente {
     }
 
     public void setComplemento(String complemento) {
-        this.complemento = complemento;
+        if (complemento == null || complemento.isBlank())
+            throw new IllegalArgumentException("O complemento não deve estar em branco");
+        else
+            this.complemento = complemento;
     }
 
     public String getDataCadastro() {
