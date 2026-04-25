@@ -24,11 +24,12 @@ public class TIReq16RegistrarVendaTests {
             v.setDataEmissao(LocalDate.now());
             // Simulando o comportamento do Service: Tratando a String antes da Entidade
             LocalDate vencimento = null;
-            if (dataVencimento != null && !dataVencimento.equals("NULL")) {
+            if (dataVencimento != null && !dataVencimento.isBlank() && !dataVencimento.equals("NULL")) {
                 vencimento = LocalDate.parse(dataVencimento, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
             }
             v.setDataVencimento(vencimento);
             v.setValor(valor);
+            assertEquals(re, "satisfatorio");
         } catch (Exception e) {
             assertEquals(re, e.getMessage());
         }

@@ -84,14 +84,22 @@ public class Vendas {
     }
 
     public void setDataVencimento(LocalDate dataVencimento) {
-        if (dataVencimento != null && (!isDomingo(dataVencimento)) && (!isAnteriorDataAtual(dataVencimento))) {
-            this.dataVencimento = dataVencimento;
-            System.out.println(">>>>>> data vencimento valida => " + dataVencimento);
-
-        } else {
-            throw new IllegalArgumentException(
-                    "Data de vencimento: formato invalido ou domingo ou menor que data atual");
+        // 1. Validação atributo obrigatorio
+        if (dataVencimento == null) {
+            throw new IllegalArgumentException("Data de vencimento é obrigatória.");
         }
+
+        // 2. Validação de Regra: Data Retroativa
+        if (isAnteriorDataAtual(dataVencimento)) {
+            throw new IllegalArgumentException("Data de vencimento não pode ser anterior à data atual.");
+        }
+
+        // 3. Validação de Regra: Fim de semana (Negócio)
+        if (isDomingo(dataVencimento)) {
+            throw new IllegalArgumentException("Data de vencimento não pode cair em um domingo.");
+        }
+
+        this.dataVencimento = dataVencimento;
 
     }
 

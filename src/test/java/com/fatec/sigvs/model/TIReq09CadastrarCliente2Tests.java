@@ -14,7 +14,7 @@ public class TIReq09CadastrarCliente2Tests {
     private Cliente cliente;
 
     @ParameterizedTest(name = "Registro {index}: CPF {0}")
-    @CsvFileSource(resources = "/dataset10.csv", numLinesToSkip = 1, emptyValue = "", nullValues = "NULL")
+    @CsvFileSource(resources = "/dataset-clientes.csv", numLinesToSkip = 1, emptyValue = "", nullValues = "NULL")
     public void ct_verifica_comportamento_cadastro(String cpf, String nome, String cep, String endereco, String bairro,
             String cidade, String complemento, String email, String re) {
         try {
