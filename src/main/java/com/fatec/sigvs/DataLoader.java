@@ -20,7 +20,7 @@ import com.fatec.sigvs.model.IClienteRepository;
  * Componente que executa a lógica de carregamento do CSV
  * assim que o Spring Boot é inicializado.
  */
-// @Component
+@Component
 public class DataLoader implements CommandLineRunner {
 
     private static final Logger logger = LogManager.getLogger(DataLoader.class);
