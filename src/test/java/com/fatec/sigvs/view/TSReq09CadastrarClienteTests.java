@@ -8,7 +8,6 @@ import static com.microsoft.playwright.assertions.PlaywrightAssertions.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.Test;
-import java.nio.file.Paths;
 
 @UsePlaywright
 public class TSReq09CadastrarClienteTests {
@@ -34,6 +33,6 @@ public class TSReq09CadastrarClienteTests {
         page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Cadastrar")).click();
         logger.info(">>>>>> verificando o resultado do teste");
         assertThat(page.getByText("Cliente cadastrado com sucesso")).isVisible();
-        page.screenshot(new Page.ScreenshotOptions().setPath(Paths.get("evidencia_cadastro_cliente.png")));
+        ScreenShotUtil.takeScreenshot(page, "TSReq09_CadastroClienteE2E");
     }
 }
