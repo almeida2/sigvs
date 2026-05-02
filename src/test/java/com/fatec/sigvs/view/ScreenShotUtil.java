@@ -17,7 +17,7 @@ public class ScreenShotUtil {
         String fileName = testName + "_" + timestamp + ".png";
 
         // Define o caminho absoluto final
-        Path fullPath = Paths.get("C:", "TesteE2E", fileName);
+        Path fullPath = Paths.get("C:", "TSMantemCliente", fileName);
 
         System.out.println("Salvando screenshot em: " + fullPath.toString());
 
