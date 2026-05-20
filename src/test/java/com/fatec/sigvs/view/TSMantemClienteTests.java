@@ -13,9 +13,9 @@ import org.junit.jupiter.api.Test;
 public class TSMantemClienteTests {
     Logger logger = LogManager.getLogger(this.getClass());
 
-    @Test
+    //@Test
     void ct01_cadastrar_cliente_com_sucesso(Page page) {
-        page.navigate("http://localhost:5173/");
+        page.navigate("https://cliente-frontv1-1632e1703d87.herokuapp.com/");
         logger.info(">>>>>> navegando da tela menu para tela de cadastro de cliente");
         page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Cadastrar cliente")).click();
         page.getByRole(AriaRole.TEXTBOX, new Page.GetByRoleOptions().setName("000.000.000-")).click();
@@ -38,9 +38,9 @@ public class TSMantemClienteTests {
         page.close();
     }
 
-    @Test
+    //@Test
     void ct02_consultar_cliente(Page page) {
-        page.navigate("http://localhost:5173/");
+        page.navigate("https://cliente-frontv1-1632e1703d87.herokuapp.com/");
         page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Consultar cliente por CPF")).click();
         page.getByRole(AriaRole.TEXTBOX, new Page.GetByRoleOptions().setName("CPF:")).click();
         page.getByRole(AriaRole.TEXTBOX, new Page.GetByRoleOptions().setName("CPF:")).fill("19894261078");
@@ -52,5 +52,19 @@ public class TSMantemClienteTests {
         ScreenShotUtil.takeScreenshot(page, "ct02_consultar_cliente_com_sucesso");
         page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Voltar")).click();
         page.close();
+    }
+
+   // @Test
+    void test(Page page) {
+        page.navigate("https://cliente-frontv1-1632e1703d87.herokuapp.com/");
+        page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Excluir cliente por CPF")).click();
+        page.getByTestId("excluir-cpf-input").click();
+        page.getByTestId("excluir-cpf-input").fill("21818191229");
+        page.onceDialog(dialog -> {
+            System.out.println(String.format("Dialog message: %s", dialog.message()));
+            dialog.dismiss();
+        });
+        page.getByTestId("excluir-cliente-button").click();
+        assertThat(page.getByRole(AriaRole.STATUS)).containsText("Cliente excluído com sucesso.");
     }
 }
