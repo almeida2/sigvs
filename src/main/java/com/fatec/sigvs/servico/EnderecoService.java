@@ -50,10 +50,10 @@ public class EnderecoService implements IEnderecoService {
                 return Optional.empty();
             }
         } catch (HttpClientErrorException e) {
-            logger.warn(">>>>>> Erro retornado pela API ao buscar CEP ");
+            logger.warn(">>>>>> Erro HTTP nao esperado retornado pela API ao buscar CEP ");
             return Optional.empty();
         } catch (ResourceAccessException e) {
-            logger.warn(">>>>>> Erro nao esperado retornado pela API ao buscar CEP=> " + e.getMessage());
+            logger.warn(">>>>>> Erro retornado pela API ao buscar CEP=> " + e.getMessage());
             return Optional.empty();
         }
     }

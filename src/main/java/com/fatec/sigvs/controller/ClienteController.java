@@ -53,6 +53,12 @@ public class ClienteController {
      * app cliente
      * As informacoes de endereco sao fornecidas automaticamente na interface
      * do usuario mas obtidas novamente quando o usuario confirma o cadastro.
+     * Se o erro no JSON for disparado estritamente pelas anotações do @Valid (como @NotNull, @NotBlank, @Size), 
+     * o Spring não vai entrar no seu catch (IllegalArgumentException).
+     * O @Valid barra a requisição antes de entrar no método do Controller e dispara uma 
+     * MethodArgumentNotValidException. Para capturar os erros do @Valid com elegância e manter o 
+     * padrão do ResponseApi, a melhor prática é criar uma classe com a anotação @RestControllerAdvice
+     * sem precisar encher o controller com try-catch.
      */
 
     @Operation(summary = "Cadastra um novo cliente", description = "Recebe um DTO de cliente e persiste no banco de dados após validações")
@@ -73,6 +79,7 @@ public class ClienteController {
 
         } catch (IllegalArgumentException e) {
             // Captura exceção de CEP inválido
+            logger.info(">>>>>> apicontroller cadastro de cliente cep invalido...");
             ResponseApi<Cliente> response = new ResponseApi<>(null, e.getMessage());
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
 
@@ -138,7 +145,7 @@ public class ClienteController {
             logger.info(">>>>>>apicontroller cliente excluido ");
             return ResponseEntity.noContent().build();
         } else {
-            // Se o recurso não foi encontrado para exclusão, retorna 404 (Not Found)
+            // Se o cpf não foi encontrado para exclusão, retorna 404 (Not Found)
             return ResponseEntity.notFound().build();
         }
     }

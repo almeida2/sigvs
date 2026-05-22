@@ -42,7 +42,7 @@ public class ClienteService implements IClienteService {
         // 2. Busca o endereço pelo CEP. Se não encontrar, lança exceção.
         Optional<Endereco> endereco = enderecoService.obtemLogradouroPorCep(clienteDTO.cep());
         if (endereco.isEmpty()) {
-            logger.info(">>>>>> Endereço não encontrado para o CEP: " + clienteDTO.cep());
+            logger.info(">>>>>> Cliente servico endereço não encontrado para o CEP: " + clienteDTO.cep());
             throw new IllegalArgumentException("Endereço não encontrado para o CEP informado.");
         }
         // 3. Converte DTO para entidade e persiste
