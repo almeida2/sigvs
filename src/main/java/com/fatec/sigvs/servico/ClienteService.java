@@ -52,9 +52,9 @@ public class ClienteService implements IClienteService {
         novoCliente.setCpf(clienteDTO.cpf());
         novoCliente.setNome(clienteDTO.nome());
         novoCliente.setCep(clienteDTO.cep());
-        novoCliente.setEndereco(clienteDTO.endereco());
-        novoCliente.setBairro(clienteDTO.bairro());
-        novoCliente.setCidade(clienteDTO.cidade());
+        novoCliente.setEndereco(endereco.get().getLogradouro());
+        novoCliente.setBairro(endereco.get().getBairro());
+        novoCliente.setCidade(endereco.get().getLocalidade());
         novoCliente.setComplemento(clienteDTO.complemento());
         novoCliente.setEmail(clienteDTO.email());
         novoCliente.setDataCadastro();

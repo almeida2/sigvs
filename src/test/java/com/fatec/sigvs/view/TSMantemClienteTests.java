@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 public class TSMantemClienteTests {
     Logger logger = LogManager.getLogger(this.getClass());
 
-    //@Test
+    @Test
     void ct01_cadastrar_cliente_com_sucesso(Page page) {
         page.navigate("https://cliente-frontv1-1632e1703d87.herokuapp.com/");
         logger.info(">>>>>> navegando da tela menu para tela de cadastro de cliente");
@@ -38,7 +38,7 @@ public class TSMantemClienteTests {
         page.close();
     }
 
-    //@Test
+    @Test
     void ct02_consultar_cliente(Page page) {
         page.navigate("https://cliente-frontv1-1632e1703d87.herokuapp.com/");
         page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Consultar cliente por CPF")).click();
@@ -54,7 +54,7 @@ public class TSMantemClienteTests {
         page.close();
     }
 
-   // @Test
+    //@Test
     void test(Page page) {
         page.navigate("https://cliente-frontv1-1632e1703d87.herokuapp.com/");
         page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Excluir cliente por CPF")).click();

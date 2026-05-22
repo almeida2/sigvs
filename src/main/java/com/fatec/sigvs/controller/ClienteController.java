@@ -26,6 +26,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 
 @Tag(name = "ClienteController", description = "Endpoints para gerenciamento de clientes")
 @CrossOrigin("*") // desabilita o cors do spring security
@@ -61,7 +62,7 @@ public class ClienteController {
             @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
     })
     @PostMapping
-    public ResponseEntity<ResponseApi<Cliente>> saveCliente(@RequestBody ClienteDTO clienteDTO) {
+    public ResponseEntity<ResponseApi<Cliente>> saveCliente(@Valid @RequestBody ClienteDTO clienteDTO) {
         logger.info(">>>>>> apicontroller cadastro de cliente iniciado...");
 
         try {
