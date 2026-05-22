@@ -52,7 +52,7 @@ public class ClienteController {
      * conter informacoes sensiveis que não devem ser expostas diretamente para o
      * app cliente
      * As informacoes de endereco sao fornecidas automaticamente na interface
-     * do usuario.
+     * do usuario mas obtidas novamente quando o usuario confirma o cadastro.
      */
 
     @Operation(summary = "Cadastra um novo cliente", description = "Recebe um DTO de cliente e persiste no banco de dados após validações")
