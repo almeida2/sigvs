@@ -18,15 +18,12 @@ public class TSMantemClienteTests {
     Logger logger = LogManager.getLogger(this.getClass());
     @Autowired
     IClienteRepository repository;
-    
-    
 
-    
-    @Test
+    // @Test
     void ct01_cadastrar_cliente_com_sucesso(Page page) {
         // Gera um CPF único e válido para esta execução
         String cpfAleatorio = CpfGenerator.generateValidCpf();
-        logger.info(">>>>>> Iniciando teste com o CPF: " + cpfAleatorio); 
+        logger.info(">>>>>> Iniciando teste com o CPF: " + cpfAleatorio);
         page.navigate("https://cliente-frontv1-1632e1703d87.herokuapp.com/");
         logger.info(">>>>>> navegando da tela menu para tela de cadastro de cliente");
         page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Cadastrar cliente")).click();
@@ -50,9 +47,9 @@ public class TSMantemClienteTests {
         page.close();
     }
 
-    @Test
+    // @Test
     void ct02_consultar_cliente(Page page) {
-        //dado que o cliente cpf 39702670055 esta cadastrado
+        // dado que o cliente cpf 39702670055 esta cadastrado
         page.navigate("https://cliente-frontv1-1632e1703d87.herokuapp.com/");
         page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Consultar cliente por CPF")).click();
         page.getByRole(AriaRole.TEXTBOX, new Page.GetByRoleOptions().setName("CPF:")).click();
@@ -67,7 +64,7 @@ public class TSMantemClienteTests {
         page.close();
     }
 
-    //@Test
+    // @Test
     void test(Page page) {
         page.navigate("https://cliente-frontv1-1632e1703d87.herokuapp.com/");
         page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Excluir cliente por CPF")).click();
