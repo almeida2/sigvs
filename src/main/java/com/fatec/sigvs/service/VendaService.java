@@ -40,7 +40,7 @@ public class VendaService implements IVendasService {
             novaVenda.adicionarProduto(produto, itemDTO.getQuantidade());
             BigDecimal total = calculaPagamento(primeiraCompra(novaVenda.getCpf()), novaVenda.getDataVenda().toString(),
                     String.valueOf(novaVenda.getTotalVenda()));
-            System.out.println(total);
+            novaVenda.setTotalVenda(total.doubleValue());
         }
 
         // Salva a venda e atualiza o estoque do produto de forma atômica

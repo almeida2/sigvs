@@ -25,6 +25,9 @@ public class Venda {
     @Column(name = "total_venda", nullable = false)
     private double totalVenda;
 
+    public Venda() {
+    }
+
     public Venda(String cpf) {
         this.cpf = cpf;
         this.dataVenda = LocalDate.now();
