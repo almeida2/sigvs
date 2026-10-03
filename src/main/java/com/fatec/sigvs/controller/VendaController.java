@@ -18,11 +18,10 @@ public class VendaController {
     private IVendasService vendaService;
 
     @PostMapping
-    public ResponseEntity<?> criarVenda(@RequestBody VendaDTO vendaDTO) {
+    public ResponseEntity<?> registrarVenda(@RequestBody VendaDTO vendaDTO) {
         try {
             Venda vendaSalva = vendaService.realizarVenda(vendaDTO);
-
-            // Transforma a entidade em um DTO limpo e livre de loops infinitos
+            //tratar o json para nao retornar o json interno
             VendaResponseDTO response = new VendaResponseDTO(vendaSalva);
 
             return ResponseEntity.ok(response);

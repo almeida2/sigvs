@@ -10,7 +10,9 @@ import java.time.format.ResolverStyle;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.stereotype.Component;
 
+@Component
 public class DescontoNaVenda {
     Logger logger = LogManager.getLogger(this.getClass());
 
@@ -48,10 +50,8 @@ public class DescontoNaVenda {
                 dataValida.getMonth().equals(Month.MAY) ||
                 dataValida.getMonth().equals(Month.NOVEMBER) ||
                 dataValida.getMonth().equals(Month.DECEMBER)) {
-            logger.info(">> E mes promocional? => true");
             return true;
         }
-        logger.info(">> E mes promocional? => false");
         return false;
     }
 

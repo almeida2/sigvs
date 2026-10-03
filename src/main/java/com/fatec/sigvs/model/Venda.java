@@ -1,6 +1,8 @@
 package com.fatec.sigvs.model;
 
 import jakarta.persistence.*;
+
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,10 +16,18 @@ public class Venda {
     @OneToMany(mappedBy = "venda", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ItemVenda> itens = new ArrayList<>();
 
+    @Column(name = "cpf", nullable = false)
+    private String cpf;
+
+    @Column(name = "data_venda", nullable = false)
+    private LocalDate dataVenda;
+
     @Column(name = "total_venda", nullable = false)
     private double totalVenda;
 
-    public Venda() {
+    public Venda(String cpf) {
+        this.cpf = cpf;
+        this.dataVenda = LocalDate.now();
     }
 
     public void adicionarProduto(Produto produto, int quantidade) {
@@ -49,6 +59,22 @@ public class Venda {
 
     public void setTotalVenda(double totalVenda) {
         this.totalVenda = totalVenda;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
+    public LocalDate getDataVenda() {
+        return dataVenda;
+    }
+
+    public void setDataVenda(LocalDate dataVenda) {
+        this.dataVenda = dataVenda;
     }
 
 }

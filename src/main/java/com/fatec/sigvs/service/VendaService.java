@@ -1,5 +1,7 @@
 package com.fatec.sigvs.service;
 
+import java.math.BigDecimal;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,9 +20,12 @@ public class VendaService implements IVendasService {
     @Autowired
     private ProdutoRepository produtoRepository;
 
+    @Autowired
+    private DescontoNaVenda descontoNaVenda;
+
     @Transactional
     public Venda realizarVenda(VendaDTO vendaDTO) {
-        Venda novaVenda = new Venda();
+        Venda novaVenda = new Venda(vendaDTO.getCpf());
 
         for (ItemVendaDTO itemDTO : vendaDTO.getItens()) {
             // Busca o produto pelo ID enviado no JSON
@@ -33,9 +38,20 @@ public class VendaService implements IVendasService {
 
             // Adiciona o item à venda e atualiza o total
             novaVenda.adicionarProduto(produto, itemDTO.getQuantidade());
+            BigDecimal total = calculaPagamento(primeiraCompra(novaVenda.getCpf()), novaVenda.getDataVenda().toString(),
+                    String.valueOf(novaVenda.getTotalVenda()));
+            System.out.println(total);
         }
 
         // Salva a venda e atualiza o estoque do produto de forma atômica
         return vendaRepository.save(novaVenda);
+    }
+
+    public String primeiraCompra(String cpf) {
+        return vendaRepository.findByCpf(cpf).isEmpty() ? "true" : "false";
+    }
+
+    public BigDecimal calculaPagamento(String primeiraCompra, String dataVenda, String valorCompra) {
+        return descontoNaVenda.regraDeDesconto(primeiraCompra, dataVenda, valorCompra);
     }
 }

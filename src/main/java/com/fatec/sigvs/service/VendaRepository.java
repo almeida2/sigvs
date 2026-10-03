@@ -5,6 +5,9 @@ import org.springframework.stereotype.Repository;
 
 import com.fatec.sigvs.model.Venda;
 
+import java.util.List;
+
 @Repository
 public interface VendaRepository extends JpaRepository<Venda, Long> {
+    List<Venda> findByCpf(String cpf);
 }
