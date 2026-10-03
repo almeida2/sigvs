@@ -1,4 +1,4 @@
-package com.fatec.sigvs.service;
+package com.fatec.sigvs;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -13,6 +13,7 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
 
 import com.fatec.sigvs.model.Venda;
+import com.fatec.sigvs.service.VendaRepository;
 
 @Component
 public class DataLoader implements CommandLineRunner {
@@ -30,7 +31,7 @@ public class DataLoader implements CommandLineRunner {
     private void loadVendasData() {
         try (BufferedReader reader = new BufferedReader(
                 new InputStreamReader(new ClassPathResource("dataset-vendas.csv").getInputStream()))) {
-            
+
             String line;
             boolean isFirstLine = true;
             List<Venda> vendasList = new ArrayList<>();
@@ -50,10 +51,10 @@ public class DataLoader implements CommandLineRunner {
                     vendasList.add(venda);
                 }
             }
-            
+
             vendaRepository.saveAll(vendasList);
             System.out.println("Dataset de vendas carregado com sucesso! Total de registros: " + vendasList.size());
-            
+
         } catch (Exception e) {
             System.err.println("Erro ao carregar o arquivo dataset-vendas.csv: " + e.getMessage());
         }
