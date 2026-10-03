@@ -15,7 +15,7 @@ public class Produto {
     @Column(nullable = false)
     private double preco;
 
-    // Novo atributo para controle de estoque
+    // atributo para controle de estoque
     @Column(name = "quantidade_estoque", nullable = false)
     private int quantidadeEstoque;
 
@@ -28,7 +28,7 @@ public class Produto {
         this.quantidadeEstoque = quantidadeEstoque;
     }
 
-    // Regra de negócio: decrementa o estoque se houver saldo
+    // decrementa o estoque se houver saldo
     public void baixarEstoque(int quantidade) {
         if (quantidade > this.quantidadeEstoque) {
             throw new IllegalArgumentException("Estoque insuficiente para o produto: " + this.nome +
