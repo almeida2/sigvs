@@ -8,14 +8,14 @@ import org.springframework.web.bind.annotation.*;
 import com.fatec.sigvs.model.Venda;
 import com.fatec.sigvs.model.VendaDTO;
 import com.fatec.sigvs.model.VendaResponseDTO;
-import com.fatec.sigvs.service.VendaService;
+import com.fatec.sigvs.service.IVendasService;
 
 @RestController
 @RequestMapping("/api/vendas")
 public class VendaController {
 
     @Autowired
-    private VendaService vendaService;
+    private IVendasService vendaService;
 
     @PostMapping
     public ResponseEntity<?> criarVenda(@RequestBody VendaDTO vendaDTO) {

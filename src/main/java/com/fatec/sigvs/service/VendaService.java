@@ -10,7 +10,7 @@ import com.fatec.sigvs.model.Venda;
 import com.fatec.sigvs.model.VendaDTO;
 
 @Service
-public class VendaService {
+public class VendaService implements IVendasService {
 
     @Autowired
     private VendaRepository vendaRepository;
