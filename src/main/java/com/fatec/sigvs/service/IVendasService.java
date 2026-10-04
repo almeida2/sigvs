@@ -8,7 +8,6 @@ import com.fatec.sigvs.model.VendaDTO;
 public interface IVendasService {
     Venda realizarVenda(VendaDTO vendaDTO);
 
-    String primeiraCompra(String cpf);
+    String isPrimeiraCompra(String cpf);
 
-    BigDecimal calculaPagamento(String primeiraCompra, String dataVenda, String valorCompra);
 }

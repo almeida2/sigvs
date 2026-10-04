@@ -22,7 +22,7 @@ public class DescontoNaVenda {
         logger.info(">> Executando servico com os atributos: "
                 + " primeiraCompra: " + primeiraCompra
                 + " dataVenda: " + dataVenda
-                + " valorCompra: " + valorCompra);
+                + " valorCompra: " + valorCompra + " sem desconto.");
         BigDecimal percentualDesconto = BigDecimal.ZERO;
         // 1. validar primeiraCompra (mes nao promocional)
         if (validarEConverterPrimeiraCompra(primeiraCompra) && !isMesPromocional(dataVenda)) {

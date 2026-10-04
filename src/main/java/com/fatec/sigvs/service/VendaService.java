@@ -38,8 +38,8 @@ public class VendaService implements IVendasService {
 
             // Adiciona o item à venda e atualiza o total
             novaVenda.adicionarProduto(produto, itemDTO.getQuantidade());
-            BigDecimal total = calculaPagamento(primeiraCompra(novaVenda.getCpf()), novaVenda.getDataVenda().toString(),
-                    String.valueOf(novaVenda.getTotalVenda()));
+            BigDecimal total = descontoNaVenda.regraDeDesconto(isPrimeiraCompra(novaVenda.getCpf()),
+                    novaVenda.getDataVenda().toString(), String.valueOf(novaVenda.getTotalVenda()));
             novaVenda.setTotalVenda(total.doubleValue());
         }
 
@@ -47,11 +47,9 @@ public class VendaService implements IVendasService {
         return vendaRepository.save(novaVenda);
     }
 
-    public String primeiraCompra(String cpf) {
+    // se o resultado da consulta por cpf for vazio, retorna true, senão false
+    public String isPrimeiraCompra(String cpf) {
         return vendaRepository.findByCpf(cpf).isEmpty() ? "true" : "false";
     }
 
-    public BigDecimal calculaPagamento(String primeiraCompra, String dataVenda, String valorCompra) {
-        return descontoNaVenda.regraDeDesconto(primeiraCompra, dataVenda, valorCompra);
-    }
 }
