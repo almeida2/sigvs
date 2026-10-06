@@ -1,7 +1,5 @@
 package com.fatec.sigvs.service;
 
-import java.math.BigDecimal;
-
 import com.fatec.sigvs.model.Venda;
 import com.fatec.sigvs.model.VendaDTO;
 
